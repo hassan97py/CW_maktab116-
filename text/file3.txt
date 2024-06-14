@@ -1,1 +1,2 @@
-Goodbye
+The weather is good today and it's sunny. This is
+another sample input for testing

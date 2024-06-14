@@ -1,1 +1,2 @@
-Hello Again
+Hello again, it's a beautiful day today. This is a
+sample input to test the program's capability
