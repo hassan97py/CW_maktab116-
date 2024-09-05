@@ -1,4 +1,4 @@
-str1 = 'Ynef'
+str1 = 'Ynag'
 str2 = 'PYnative'
 flag = True
 for char in str1:

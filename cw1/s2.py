@@ -7,3 +7,4 @@ print("farenheit:",f)
 far = float(input("farenheit:"))
 cel = (far - 32) * (5/9)
 print("celsius :", cel)
+

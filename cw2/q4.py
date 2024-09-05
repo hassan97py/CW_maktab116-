@@ -1,6 +1,7 @@
 
 def mytuple(tuple):
     lst = list(tuple)
+    print(lst)
     key_lst, value_lst = [],[]
     for i in range(len(lst)):
         if i % 2 == 0:

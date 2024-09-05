@@ -9,13 +9,13 @@ sample_dict = {
 'emp2': {'name': 'Emma', 'salary': 8000},
 'emp3': {'name': 'Brad', 'salary': 500}
 }
-for i in sample_dict:
-    if sample_dict.get(i).get('name')== "Brad":
-        sample_dict.get(i).update({'salary' : 8500})
+# for i in sample_dict:
+#     if sample_dict.get(i).get('name')== "Brad":
+#         sample_dict.get(i).update({'salary' : 8500})
 
 
-print(sample_dict)
-
-# sample_dict['emp3']['salary'] = 8500
 # print(sample_dict)
+
+sample_dict['emp3']['salary'] = 8500
+print(sample_dict)
 

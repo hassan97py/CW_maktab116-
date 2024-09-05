@@ -4,7 +4,7 @@ def sum1(n):
         s=n+s
         n-=1
     return s
-a=sum1(10)
+a=sum1(3)
 print(a)  
 
 

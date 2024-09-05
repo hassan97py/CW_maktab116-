@@ -9,8 +9,8 @@ def copy_files_to_new_file(files_to_copy, output_file):
                 outfile.write(" ") # Add a blank line between file contents
 
 # Example usage
-files_to_copy = ["../cw/text/file1.txt", "../cw/text/file2.txt", "../cw/text/file3.txt"]
-output_file = "../cw/text/hassan.txt"
+files_to_copy = ["./cw/text/file1.txt", "./cw/text/file2.txt", "./cw/text/file3.txt"]
+output_file = "./cw/text/hassan.txt"
 
 copy_files_to_new_file(files_to_copy, output_file)
 print(f"Contents of the files have been copied to '{output_file}'.")
