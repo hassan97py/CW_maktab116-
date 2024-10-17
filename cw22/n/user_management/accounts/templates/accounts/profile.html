@@ -1,0 +1,97 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>profile</title>
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+      }
+
+      .container {
+          width: 80%;
+          margin: 0 auto;
+          overflow: hidden;
+          background: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          padding: 20px;
+      }
+
+      header {
+          background: #007BFF;
+          color: #fff;
+          padding: 10px 0;
+          text-align: center;
+          border-radius: 8px 8px 0 0;
+      }
+
+      h1 {
+          margin: 0;
+          font-size: 2.5em;
+      }
+
+      .profile-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 20px;
+      }
+
+      .profile-info img {
+          border-radius: 50%;
+          width: 150px;
+          height: 150px;
+          border: 3px solid #007BFF;
+      }
+
+      .details {
+          flex: 1;
+          margin-left: 20px;
+      }
+
+      .details h2 {
+          margin: 0;
+          font-size: 2em;
+          color: #333;
+      }
+
+      .details p {
+          color: #666;
+          line-height: 1.5;
+      }
+
+      footer {
+          text-align: center;
+          padding: 20px;
+          font-size: 0.9em;
+          color: #777;
+          border-top: 1px solid #eaeaea;
+          margin-top: 20px;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <header>
+          <h1>Profile Page</h1>
+      </header>
+      <div class="profile-info">
+          <img src="{%static "img\951601-5739.jpg" %}" alt="Profile Picture">
+          <div class="details">
+              <h2>{{user.username}}</h2>
+              <p>coach</p>
+              <p>Passionate about creating beautiful and functional web applications.</p>
+          </div>
+      </div>
+      <footer>
+          <p>&copy; 2024 Your Company. All rights reserved.</p>
+      </footer>
+  </div>
+</body>
+</html>
