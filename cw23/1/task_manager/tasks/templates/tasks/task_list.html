@@ -1,0 +1,7 @@
+<h2>Task List</h2> 
+<ul> 
+    {% for task in tasks %} 
+    <li>{{ task.title }} - {{ task.due_date }} - {% if task.completed %}Completed{% else %}Not Completed{% endif %}</li> 
+    {% endfor %}
+</ul> 
+<a href="{% url 'task_create' %}">Create a New Task</a>

@@ -16,4 +16,4 @@ class CustomUser(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
     def __str__(self):
-        return self.username
+        return f"{self.username} - {self.email} - {self.phone_number} - {self.date_of_birth}"

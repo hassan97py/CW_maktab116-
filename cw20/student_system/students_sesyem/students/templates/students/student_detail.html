@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ student.name }}</h2>
+  <p>Age: {{ student.age }}</p>
+  <p>Grade: {{ student.grade }}</p>
+  <h3>Enrolled Courses:</h3>
+  <ul>
+    {% for course in student.courses.all %}
+      <li>{{ course.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% comment %} {% url 'student_detail' student.id %} {% endcomment %}

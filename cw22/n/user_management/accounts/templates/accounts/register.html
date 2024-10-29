@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +16,33 @@
 {{ form.as_p }}
 <button type="submit">Register</button>
 </form>
+</div>
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>ثبت‌نام کاربر</title>
+</head>
+<body>
+<div class="container">
+    <h1>ایجاد حساب کاربری</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <!-- ورودی برای بارگذاری عکس -->
+        <label for="profile_picture">عکس پروفایل:</label>
+        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" required>
+        
+        <button type="submit">ثبت‌نام</button>
+    </form>
 </div>
 </body>
 </html>

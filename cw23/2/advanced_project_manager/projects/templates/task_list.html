@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List for Project: {{ project.name }}</h1>
+    <a href="{% url 'TaskCreateView' %}?project_id={{ project.id }}">Create New Task</a>
+    <form method="post">
+        {% csrf_token %}
+        <select name="sort">
+            <option value="due_date">Sort by Due Date</option>
+            <option value="title">Sort by Title</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.completed }}</td>
+                    <td>
+                        <form method="post" action="{% url 'task_toggle' task.id %}">
+                            {% csrf_token %}
+                            <button type="submit">{{ task.completed|yesno:"Undo,Complete" }}</button>
+                        </form>
+                        <a href="{% url 'task_update' task.id %}">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'project_list' %}">Back to Projects</a>
+</body>
+</html>

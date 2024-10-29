@@ -1,0 +1,165 @@
+​pip install django
+--------
+django-admin startproject student_registration
+----------
+cd student_registration
+----------------------
+python manage.py startapp registration
+---------------
+	1. Add the app to settings.py: Open student_registration/settings.py and add 'registration' to the INSTALLED_APPS list:
+	2. python
+	3. Copy
+
+INSTALLED_APPS = [
+    ...
+    'registration',
+    'django.contrib.sessions',
+    'debug_toolbar',  # If you plan to use Debug Toolbar
+]
+-------------
+Step 2: Create Models
+In registration/models.py, define the Student and Registration models.
+--------------
+from django.db import models
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    age = models.PositiveIntegerField()
+    grade = models.CharField(max_length=10)
+
+    def clean(self):
+        if self.age <= 10:
+            raise ValidationError('Age must be greater than 10.')
+
+class Registration(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    registration_time = models.DateTimeField(auto_now_add=True)
+----------------
+Step 3: Create Forms
+In registration/forms.py, create a form for student registration.
+
+
+from django import forms
+from .models import Student
+
+class StudentRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['name', 'email', 'age', 'grade']
+
+----------------------
+Step 4: Create Views
+In registration/views.py, handle GET and POST requests.
+
+
+from django.shortcuts import render, redirect
+from .forms import StudentRegistrationForm
+from .models import Student
+from django.contrib import messages
+
+def register_student(request):
+    if request.method == 'POST':
+        form = StudentRegistrationForm(request.POST)
+        if form.is_valid():
+            student = form.save()
+            response = redirect('success')
+            response.set_cookie('student_name', student.name)
+            messages.success(request, 'Registration successful!')
+            return response
+    else:
+        form = StudentRegistrationForm()
+    
+    return render(request, 'registration/register.html', {'form': form})
+
+def success(request):
+    student_name = request.COOKIES.get('student_name', 'Guest')
+    return render(request, 'registration/success.html', {'student_name': student_name})
+
+---------------------
+Step 5: Define URLs
+In registration/urls.py, set up the URL routing.
+
+from django.urls import path
+from .views import register_student, success
+
+urlpatterns = [
+    path('register/', register_student, name='register'),
+    path('success/', success, name='success'),
+]
+
+--------------
+Include this app's URLs in student_registration/urls.py:
+---------------------
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('registration.urls')),
+]
+
+-------------------
+Step 6: Create Templates
+Create a directory structure for templates: registration/templates/registration/.
+
+	1. register.html:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+</head>
+<body>
+    <h1>Register a New Student</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+</body>
+</html>
+------------
+	1. success.html:
+---------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+</head>
+<body>
+    <h1>Registration Successful!</h1>
+    <p>Welcome, {{ student_name }}!</p>
+    <a href="{% url 'register' %}">Register another student</a>
+</body>
+</html>
+
+
+---------------
+Step 7: Migrations
+Run the following commands to create the database tables:
+--------------------------------    
+python manage.py makemigrations
+python manage.py migrate
+--------------------------
+Step 8: Run the Server
+Start the development server:
+    
+python manage.py runserver
+
+
+Explanation of the Code
+	* Models: The Student model defines the structure of student data with validation. The Registration model tracks registration times.
+	* Forms: The StudentRegistrationForm uses Django's ModelForm to streamline form creation and validation.
+	* Views: The register_student view handles both displaying the form and processing submissions. It uses cookies to store the student's name and redirects to a success page after registration.
+	* Templates: HTML files for displaying the registration form and success message. CSRF protection is included in the form.
+	* URLs: The URL configuration maps requests to the appropriate views.
+This setup provides a functional Student Registration System using Django with CSRF protection, session management, and cookie handling. You can further enhance it with additional features as outlined in your exercise.

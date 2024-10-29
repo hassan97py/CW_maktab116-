@@ -1,10 +1,10 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>profile</title>
+  <title>Profile</title>
   <style>
       body {
           font-family: 'Arial', sans-serif;
@@ -82,11 +82,12 @@
           <h1>Profile Page</h1>
       </header>
       <div class="profile-info">
-          <img src="{%static "img\951601-5739.jpg" %}" alt="Profile Picture">
+          <img src="{% static 'img/951601-5739.jpg' %}" alt="Profile Picture">
           <div class="details">
-              <h2>{{user.username}}</h2>
-              <p>coach</p>
-              <p>Passionate about creating beautiful and functional web applications.</p>
+              <h2>{{ username }}</h2>
+              <p>Email: {{ email }}</p>
+              <p>Phone Number: {{ phone_number }}</p>
+              <p>Date of Birth: {{ date_of_birth }}</p>
           </div>
       </div>
       <footer>

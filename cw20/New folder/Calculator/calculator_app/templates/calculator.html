@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        input { margin: 5px; }
+        button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <form action="" method="get">
+        <input type="number" name="a" required placeholder="Operand A">
+        <input type="number" name="b" required placeholder="Operand B">
+        <div>
+            <button type="submit" formaction="{% url 'add' a b %}">Add</button>
+            <button type="submit" formaction="{% url 'subtract' a b %}">Subtract</button>
+            <button type="submit" formaction="{% url 'multiply' a b %}">Multiply</button>
+            <button type="submit" formaction="{% url 'divide' a b %}">Divide</button>
+        </div>
+    </form>
+</body>
+</html>
