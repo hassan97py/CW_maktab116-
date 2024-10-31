@@ -124,9 +124,13 @@ class TaskListView(SortMixin, ListView):
     context_object_name = 'tasks'
     sort_param = 'due_date'  # Default sorting for tasks
 
+    # def get_queryset(self):
+    #     project_id = self.kwargs.get('project_id')  # Get project_id from URL
+    #     return Task.objects.filter(project_id=project_id).order_by(self.sort_param)
+    
     def get_queryset(self):
-        project_id = self.kwargs.get('project_id')  # Get project_id from URL
-        return Task.objects.filter(project_id=project_id).order_by(self.sort_param)
+        sort_by = self.request.GET.get('sort', self.sort_param)
+        return Task.objects.order_by(sort_by)
 
 class TaskCreateView(CreateView):
     model = Task
@@ -141,6 +145,10 @@ class TaskCreateView(CreateView):
             form.add_error('end_date', 'End date cannot be before the start date.')
             return self.form_invalid(form)
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('task_list', args=[self.object.project.id])
+
 
 # class TaskListView(TaskSortMixin, ListView):
 #     model = Task
@@ -169,11 +177,11 @@ class ProjectUpdateView(ProjectCreateView, UpdateView):
     success_url = reverse_lazy('project_list')
 
 
-class TaskCreateView(CreateView):
-    model = Task
-    fields = ['project', 'title', 'description', 'completed', 'due_date']
-    template_name = 'task_form.html'
-    success_url = reverse_lazy('task_list')
+# class TaskCreateView(CreateView):
+#     model = Task
+#     fields = ['project', 'title', 'description', 'completed', 'due_date']
+#     template_name = 'task_form.html'
+#     success_url = reverse_lazy('task_list')
 
 
 class TaskUpdateView(TaskCreateView, UpdateView):
