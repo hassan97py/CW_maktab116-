@@ -146,8 +146,8 @@ class TaskCreateView(CreateView):
             return self.form_invalid(form)
         return super().form_valid(form)
     
-    def get_success_url(self):
-        return reverse_lazy('task_list', args=[self.object.project.id])
+    # def get_success_url(self):
+    #     return reverse_lazy('task_list', args=[self.object.project.id])
 
 
 # class TaskListView(TaskSortMixin, ListView):
