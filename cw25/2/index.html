@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body class="h-full">
+    <h2>سامانه مدیریت حقوق</h2>
+    <div class="inps">
+      <div class="inp">
+        <label for="name">نام</label>
+        <input type="text" id="name" />
+      </div>
+      <div class="inp">
+        <label for="salary">حقوق</label>
+        <input type="number" id="salary" />
+      </div>
+      <button class="save_btn" id="saveBtn">ثبت نهایی</button>
+    </div>
+    <div class="inps">
+      <div class="inp">
+        <label for="sort">مرتب سازی :</label>
+        <select name="" id="sort">
+          <option value="">یک گزینه انتخاب کنید</option>
+          <option value="highest">بیشترین حقوق</option>
+          <option value="lowest">کمترین حقوق</option>
+        </select>
+      </div>
+      <button class="delete_all" id="deleteAll">حذف همه</button>
+    </div>
+    <div id="listSalaries" class="">
+    <!--  <div class="listItem" >
+        <span>name</span>
+        <span>123164تومان</span>
+        <div>
+          <button class="edit">ویرایش</button>
+          <button class="delete">حذف</button>
+        </div>
+      </div> -->
+    </div>
+    <script src="./test.js">
+
+    </script>
+  </body>
+</html>
