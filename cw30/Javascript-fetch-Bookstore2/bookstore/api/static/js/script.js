@@ -2,6 +2,7 @@ const bookList = document.getElementById('book-list');
 const bookForm = document.getElementById('book-form');
 const refreshButton = document.getElementById('refresh-button');
 const authorSelect = document.getElementById('author');
+const authorForm = document.getElementById('author-form');
 
 // تابع برای دریافت و نمایش کتاب‌ها
 async function fetchBooks() {
@@ -10,17 +11,18 @@ async function fetchBooks() {
         const books = await response.json();
         bookList.innerHTML = books.map(book => `
             <div>
+                <h1>کتاب‌ها</h1>
                 <h3>${book.title}</h3>
                 <p>${book.description}</p>
                 <p>تاریخ انتشار: ${book.published_date}</p>
-                <p>نویسنده: ${book.author.name}</p>
-                <button onclick="deleteBook(${book.id})">حذف</button>
+                <p>نویسنده: ${book.author_name ? book.author_name : 'نامشخص'}</p>
             </div>
         `).join('');
     } catch (error) {
-        alert('عدم توانایی در دریافت داده. لطفاً دوباره تلاش کنید.');
+        console.error('Error fetching books:', error);
     }
 }
+
 
 // تابع برای افزودن کتاب جدید
 bookForm.addEventListener('submit', async (event) => {
@@ -56,6 +58,27 @@ async function deleteBook(id) {
         }
     }
 }
+
+// تابع برای افزودن نویسنده جدید
+authorForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const name = document.getElementById('author-name').value;
+    const biography = document.getElementById('author-biography').value;
+
+    try {
+        await fetch('/api/authors/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, biography }),
+        });
+        fetchAuthors(); // به‌روزرسانی لیست نویسندگان
+        authorForm.reset(); // ریست کردن فرم
+    } catch (error) {
+        alert('عدم توانایی در افزودن نویسنده. لطفاً دوباره تلاش کنید.');
+    }
+});
 
 // دکمه بارگذاری مجدد
 refreshButton.addEventListener('click', fetchBooks);
