@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category Explorer</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Category Explorer</h1>
+
+    <label for="category-select">Select a category:</label>
+    <select id="category-select">
+        <option value="">Choose a category</option>
+    </select>
+
+    <ul id="subcategory-list">
+        <!-- Subcategories will be added dynamically -->
+    </ul>
+
+    <!-- Optional: Add a button or input field for adding new categories or subcategories -->
+    <div>
+        <input type="text" id="new-category-input" placeholder="Add new category">
+        <button id="add-category-btn">Add Category</button>
+    </div>
+
+    <script src="{% static 'scripts.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کتابخانه دیجیتال</title>
+</head>
+<body>
+    <h1>کتابخانه دیجیتال</h1>
+    <section id="book-list"></section>
+
+
+    <h2>افزودن نویسنده جدید</h2>
+    <form id="author-form">
+        <input type="text" id="author-name" placeholder="نام نویسنده" required>
+        <textarea id="author-biography" placeholder="بیوگرافی (اختیاری)"></textarea>
+        <button type="submit">افزودن نویسنده</button>
+    </form>
+    
+
+    <h2>افزودن کتاب جدید</h2>
+    <form id="book-form">
+        <input type="text" id="title" placeholder="عنوان کتاب" required>
+        <textarea id="description" placeholder="توضیحات (اختیاری)"></textarea>
+        <input type="date" id="published_date" required>
+        <select id="author" required></select>
+        <button type="submit">افزودن کتاب</button>
+    </form>
+
+    <button id="refresh-button">بارگذاری مجدد کتاب‌ها</button>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
